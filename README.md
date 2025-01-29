@@ -1,6 +1,6 @@
 Verilog workflow tools
 
-##Notepad++
+## Notepad++
 Assuming you have Notepad++ installed, install ```Pork To Sausage```
 
 1. Open Notepad++
@@ -22,12 +22,12 @@ Next, you need to configure the plugin.
 5. A file will open. Copy the contents of this repository's pork2Sausage.ini file into this file.
 6. There are some path names which you will have to fill in for yourself. Do absolute names.
 
-##Testbench
+## Testbench
 
 The testbench program can be compiled using the included CMakeLists.txt file.
 There is also further information on the API of said program in its own README.
 
-##Git 
+## Git 
 
 There is a pre-commit hook which will do the following.
 
@@ -53,6 +53,6 @@ Example output:
 		50 	// TODO: Write a tb for this module.
 		51 	// TODO: Current implementation performance to ROM implementation.
 
-#Git Ignore
+# Git Ignore
 
 There is also a .gitignore which gets rid of everything besides source files, testbench, and ip cores.
