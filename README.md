@@ -53,6 +53,6 @@ Example output:
 		50 	// TODO: Write a tb for this module.
 		51 	// TODO: Current implementation performance to ROM implementation.
 
-# Git Ignore
+### Git Ignore
 
 There is also a .gitignore which gets rid of everything besides source files, testbench, and ip cores.
