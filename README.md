@@ -55,4 +55,4 @@ Example output:
 
 ### Git Ignore
 
-There is also a .gitignore which gets rid of everything besides source files, testbench, and ip cores.
+There is also a .gitignore which gets rid of everything besides source files, testbench, and ip cores. Verify that your directory names do not conflict with this if you choose to use it.
