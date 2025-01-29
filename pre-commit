@@ -1,0 +1,39 @@
+#!/bin/bash
+
+# File to store TODOs
+TODO_FILE="TODO"
+
+# Clear the TODO file
+> "$TODO_FILE"
+
+# Search all .v files in the repository
+FILES=$(git ls-files '*.v')
+
+echo -e "TODO list:" >> "$TODO_FILE"
+
+for FILE in $FILES; do
+  # Use grep to find "TODO"
+  TODO_LINES=$(grep -n "TODO" "$FILE")
+  if [ -n "$TODO_LINES" ]; then
+    # Add the file name to the TODO file
+    echo -e "\n$FILE\n" >> "$TODO_FILE"
+    # Process each TODO line
+    echo "$TODO_LINES" | while read -r line; do
+      LINE_NUMBER=$(echo "$line" | cut -d: -f1)
+      TEXT=$(echo "$line" | cut -d: -f2-)
+      echo -e "\t$LINE_NUMBER \t$TEXT" >> "$TODO_FILE"
+    done
+  fi
+done
+
+# Check if any TODOs were found and warn the user
+if [ -s "$TODO_FILE" ]; then
+  echo "TODOs found and written to $TODO_FILE:"
+  #cat "$TODO_FILE"
+else
+  echo "No TODOs found."
+  rm -f "$TODO_FILE"
+fi
+
+# Exit with success
+exit 0

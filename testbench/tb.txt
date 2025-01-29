@@ -1,0 +1,13 @@
+reg  clk, reset_n, GatePC, enable;
+reg[1:0]  pcMux;
+reg[15:0]  bus, adder;
+wire[15:0] result;
+
+programCounter programCounter_inst(
+ .pcMux(pcMux),.bus(bus),.adder(adder),.clk(clk),.reset_n(reset_n),.GatePC(GatePC),.enable(enable),.result(result));
+
+always #5 clk = ~clk;
+
+initial begin
+clk = 0;
+end
