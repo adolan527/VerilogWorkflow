@@ -1,6 +1,6 @@
 Verilog workflow tools
 
-## Notepad++
+# Notepad++
 Assuming you have Notepad++ installed, install ```Pork To Sausage```
 
 1. Open Notepad++
@@ -22,12 +22,68 @@ Next, you need to configure the plugin.
 5. A file will open. Copy the contents of this repository's pork2Sausage.ini file into this file.
 6. There are some path names which you will have to fill in for yourself. Do absolute names.
 
+To assign the plugin commands to hotkeys do the following.
+
+1. Open Notepad++
+2. Select `Macros`
+3. Select `Modify Shortcut/Delete Macro
+4. Select `Plugin Commands`
+5. Locate the commands titled `Verilog Find Definition` and `Verilog Create TB`.
+6. Edit the macro field.
+
 ## Testbench
 
 The testbench program can be compiled using the included CMakeLists.txt file.
 There is also further information on the API of said program in its own README.
 
-## Git 
+## Using the commands
+
+### Find Definition 
+Highlight the name of a module, then run the command. Notepad++ will then open the definition at its exact line number.
+
+### Create TB
+
+1. Copy the entirety of module's port definitions. 
+2. Paste in the location you want the testbench.
+3. Highlight the port definitions, then run the command.
+
+Example highlighted text:
+
+	module regFile(
+		input[15:0] data, //databus input
+		input[2:0] DR, //destination register. Address of the register to write to
+		input LDREG, //active high write enable bit. 
+		input[2:0] SR1, SR2, //source registers 1 and 2. Address of register to read from
+		input clk, //clk
+		input reset_n, //active low async reset.
+		output reg[15:0] SR1out, SR2out //data from source registers 1 and 2
+		);
+		
+Example output:
+
+	reg  LDREG, clk, reset_n;
+	reg[2:0]  DR, SR1, SR2;
+	reg[15:0]  data;
+	wire[15:0] SR1out SR2out t;
+
+	regFile regFile_inst(
+	 .data(data),.DR(DR),.LDREG(LDREG),.SR1(SR1),.SR2(SR2),.clk(clk),.reset_n(reset_n),.SR1out(SR1out),.SR2out(SR2out),.t(t));
+
+	always #5 clk = ~clk;
+
+	initial begin
+	clk = 0;
+	end
+
+Note: the format of the port definition must be formatted as such:
+	"module NAME(" - is on its own line.
+	");" - is on its own line
+	No empty lines between ports
+	PORTNAME, - no whitespace between a port name and the following comma.
+	
+These limitations could be fixed, but the aforementioned formatting is a good guideline regardless.
+
+# Git 
 
 There is a pre-commit hook which will do the following.
 
