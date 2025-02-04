@@ -1,6 +1,7 @@
 Verilog workflow tools that I use. 
 Contents:
-	Find Definition Notepad++ command
+
+	Find Definition Notepad++ command 
  	Create TB Notepad++ command
   	TODO documenation Git pre-commit hook  
    	.gitignore file
