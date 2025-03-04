@@ -1,4 +1,12 @@
-Verilog workflow tools
+Verilog workflow tools that I use. 
+The Git pre-commit hook and the .gitignore file are very easy to implement make a big difference if you are working within a repo.
+The commands will take a few minutes to set up but are universally useful.
+Contents:
+
+	Find Definition Notepad++ command 
+ 	Create TB Notepad++ command
+  	TODO documenation Git pre-commit hook  
+   	.gitignore file
 
 # Notepad++
 Assuming you have Notepad++ installed, install ```Pork To Sausage```
