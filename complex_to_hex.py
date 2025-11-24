@@ -1,50 +1,15 @@
-import argparse
 import re
+import sys
 
+def hex_to_bin(hex_num):
+    bin_str = f"{int(hex_num, 16):016b}"  # Convert to 16-bit binary
+    return " ".join([bin_str[i:i+4] for i in range(0, 16, 4)])  # Group into 4-bit chunks
 
-def int_to_signed_magnitude(n):
-    if not (-32767 <= n <= 32767):
-        raise ValueError("Number out of range for 16-bit signed magnitude.")
-
-    sign_bit = '0' if n >= 0 else '1'
-    magnitude = abs(n)
-    magnitude_bits = f'{magnitude:015b}'  # Convert to 15-bit binary (excluding sign bit)
-
-    return sign_bit + magnitude_bits
-
-
-def complex_to_32bit(complex_str):
-    match = re.fullmatch(r'\s*(-?\d+)\s*([+-])\s*(\d+)j\s*', complex_str)
-    if not match:
-        raise ValueError("Invalid complex number format. Use 'a + bj' or 'a - bj'")
-
-    a = int(match.group(1))
-    b = int(match.group(3))
-    if match.group(2) == '-':
-        b = -b
-
-    a_bin = int_to_signed_magnitude(a)
-    b_bin = int_to_signed_magnitude(b)
-
-    combined_bin = b_bin + a_bin  # Swap order: imaginary (b) first, real (a) second
-    verilog_format = f"32'h{int(combined_bin, 2):08X}"
-
-    return verilog_format
-
-
-def main():
-    parser = argparse.ArgumentParser(
-        description="Convert a complex number (a + bj) into a 32-bit signed magnitude representation.")
-    parser.add_argument("complex_number", type=str, help="Complex number in the format 'a + bj' or 'a - bj'")
-    args = parser.parse_args()
-
-    try:
-        result = complex_to_32bit(args.complex_number)
-        # print(f"32-bit Signed Magnitude: {result}")
-        print(result)
-    except ValueError as e:
-        print(e)
-
-
+# Example usage
 if __name__ == "__main__":
-    main()
+    if len(sys.argv) < 2:
+        print("Usage: python script.py '<input_string>'")
+        sys.exit(1)
+    input_str = sys.argv[1]
+
+    print('[',hex_to_bin(input_str),']')
